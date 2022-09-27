@@ -1,65 +1,72 @@
 public class Radio {
-    int currentStation;
-    int currentVolume;
+    private int currentStations;
+    private final int totalStations = 10;
+    private int maxStations = totalStations - 1;
+    private int minStations;
+    private int currentVolume;
+    private final int maxVolume = 100;
+    private int minVolume;
 
-    //station
-    public int getCurrentStation() {
-        return currentStation;
+    public Radio() {
     }
 
-    public void setCurrentStation(int currentStation) {
-        if (currentStation < 0) {
-            return;
-        }
-        if (currentStation > 9) {
-            return;
-        }
-        this.currentStation = currentStation;
+    public Radio(int totalStations) {
+        this.maxStations = totalStations - 1;
     }
 
-    public void nextStation() {
-        if (currentStation == 9) {
-            this.currentStation = 0;
-            return;
-        }
-        this.currentStation++;
+    public int getCurrentStations() {
+        return this.currentStations;
     }
 
-    public void prevStation() {
-        if (currentStation == 0) {
-            this.currentStation = 9;
+    public void setCurrentStations(int currentStations) {
+        if (currentStations < minStations) {
             return;
         }
-        this.currentStation--;
+        if (currentStations > maxStations) {
+            return;
+        }
+        this.currentStations = currentStations;
     }
 
-    //volume
+    public void nextStations() {
+        if (currentStations == maxStations) {
+            this.currentStations = minStations;
+            return;
+        }
+        this.currentStations++;
+    }
+
+    public void prevStations() {
+        if (currentStations == minStations) {
+            this.currentStations = maxStations;
+            return;
+        }
+        this.currentStations--;
+    }
+
     public int getCurrentVolume() {
-        return currentVolume;
+        return this.currentVolume;
     }
-
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > 10) {
-            currentVolume = 10;
+        if (currentVolume > maxVolume) {
+            currentVolume = maxVolume;
         }
-        if (currentVolume < 0) {
-            currentVolume = 0;
+        if (currentVolume < minVolume) {
+            currentVolume = minVolume;
         }
         this.currentVolume = currentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             this.currentVolume++;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             this.currentVolume--;
         }
     }
-
-
 }
